@@ -46,7 +46,8 @@ A Django-based movie ticket booking platform where users can browse movies, view
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/yourusername/movie-ticket-booking-system.git
+HTTPS - git clone [https://github.com/yourusername/movie-ticket-booking-system.git](https://github.com/SushantS8/movie-ticket-booking-system.git)
+SSH - git clone git@github.com:SushantS8/movie-ticket-booking-system.git
 cd movie-ticket-booking-system
 ```
 
