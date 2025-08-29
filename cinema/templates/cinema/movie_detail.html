@@ -1,0 +1,21 @@
+{% extends 'cinema/base.html' %}
+{% block title %}{{ movie.title }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h1>{{ movie.title }}</h1>
+  <div>Duration: {{ movie.duration_min }} min</div>
+  <div>Rating: {{ movie.rating }}</div>
+  <p>{{ movie.description }}</p>
+</div>
+<div class="card">
+  <h3>Showtimes</h3>
+  {% for st in showtimes %}
+    <div style="margin-bottom:10px">
+      <strong>{{ st.start_time|date:"Y-m-d H:i" }}</strong> — {{ st.auditorium }} — Price: Rs. {% widthratio st.price_cents 100 1 %}.00
+      <a class="btn" href="{% url 'cinema:showtime_detail' st.id %}" style="margin-left:8px">Book</a>
+    </div>
+  {% empty %}
+    <p>No showtimes.</p>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'cinema/base.html' %}
+{% block title %}Booking confirmed{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Booking Confirmed</h2>
+  <p>{{ showtime.movie.title }} — {{ showtime.start_time|date:"Y-m-d H:i" }} ({{ showtime.auditorium }})</p>
+  <ul>
+    {% for b in bookings %}
+      <li>Booking ID <strong>#{{ b.id }}</strong> — Seat <strong>{{ b.seat_row }}{{ b.seat_col }}</strong></li>
+    {% endfor %}
+  </ul>
+  <p>Total: Rs. {% widthratio total_cents 100 1 %}.00</p>
+  <a class="btn" href="{% url 'cinema:home' %}">Back to Home</a>
+</div>
+{% endblock %}

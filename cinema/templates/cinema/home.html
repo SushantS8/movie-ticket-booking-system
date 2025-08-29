@@ -1,0 +1,18 @@
+{% extends 'cinema/base.html' %}
+{% block title %}Movies{% endblock %}
+{% block content %}
+<h1>Now showing</h1>
+<div class="grid">
+{% for movie in movies %}
+  <div class="card">
+    <h3>{{ movie.title }}</h3>
+    <div>Duration: {{ movie.duration_min }} min</div>
+    <div>Rating: {{ movie.rating }}</div>
+    <p>{{ movie.description }}</p>
+    <a class="btn" href="{% url 'cinema:movie_detail' movie.id %}">View showtimes</a>
+  </div>
+{% empty %}
+  <p>No movies with upcoming showtimes.</p>
+{% endfor %}
+</div>
+{% endblock %}

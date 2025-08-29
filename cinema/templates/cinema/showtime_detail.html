@@ -1,0 +1,35 @@
+{% extends 'cinema/base.html' %}
+{% block title %}{{ showtime.movie.title }} — {{ showtime.start_time|date:"Y-m-d H:i" }}{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>{{ showtime.movie.title }}</h2>
+  <div>{{ showtime.start_time|date:"Y-m-d H:i" }} — {{ showtime.auditorium }}</div>
+  <div>Price: Rs. {% widthratio showtime.price_cents 100 1 %}.00</div>
+</div>
+<div class="card">
+  <div class="screen">Screen this way</div>
+  {% for r, cells in grid %}
+    <div>
+      <span class="row-label">{{ r }}</span>
+      {% for seat in cells %}
+        <span class="seat {% if seat.is_booked %}taken{% else %}free{% endif %}">{{ seat.col_number }}</span>
+      {% endfor %}
+    </div>
+  {% endfor %}
+  <div style="opacity:.8;margin-top:8px">Legend: blue = free, red = taken</div>
+</div>
+<div class="card">
+  <h3>Book seats</h3>
+  <form method="post" action="{% url 'cinema:book_seats' showtime.id %}">
+    {% csrf_token %}
+    <label for="id_user_name">Your name</label>{{ form.user_name }}
+    <label for="id_user_phone">Phone</label>{{ form.user_phone }}
+    <label for="id_seats">Seats</label>{{ form.seats }}
+    <small>{{ form.seats.help_text }}</small>
+    <div style="margin-top:8px">
+      <button class="btn" type="submit">Confirm booking</button>
+      <a class="btn secondary" href="{% url 'cinema:movie_detail' showtime.movie.id %}">Back</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

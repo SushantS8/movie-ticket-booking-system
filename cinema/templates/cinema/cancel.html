@@ -1,0 +1,18 @@
+{% extends 'cinema/base.html' %}
+{% block title %}Cancel booking{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Cancel a booking</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="user_phone">Phone Number</label>
+    {{ form.user_phone }}
+    <div style="margin-top:8px">
+      <button class="btn" type="submit">Find My Bookings</button>
+      <a class="btn secondary" href="{% url 'cinema:home' %}">Back</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,21 @@
+{% extends 'cinema/base.html' %}
+{% block title %}Select Booking{% endblock %}
+{% block content %}
+<div class="card">
+  <h2>Select a booking to cancel</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for b in bookings %}
+      <div class="booking-card" style="margin-bottom:12px; border:1px solid #ddd; padding:10px; border-radius:6px;">
+        <p><strong>Movie:</strong> {{ b.showtime.movie.title }}</p>
+        <p><strong>Showtime:</strong> {{ b.showtime.start_time }}</p>
+        <p><strong>Seat:</strong> Row {{ b.seat_row }} - {{ b.seat_col }}</p>
+        <button class="btn danger" type="submit" name="booking_id" value="{{ b.id }}">Cancel this booking</button>
+      </div>
+    {% endfor %}
+  </form>
+  <div style="margin-top:8px">
+    <a class="btn secondary" href="{% url 'cinema:cancel_booking' %}">Back</a>
+  </div>
+</div>
+{% endblock %}
